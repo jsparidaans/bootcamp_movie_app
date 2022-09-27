@@ -11,9 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.movieapp.model.getMovies
+import com.example.movieapp.widgets.MovieRow
 
 @Composable
-fun DetailsScreen(navController: NavController, movieData: String?) {
+fun DetailsScreen(navController: NavController, movieId: String?) {
+    val movie = getMovies().first { it.id == movieId }
     Scaffold(topBar = {
         TopAppBar(backgroundColor = Color.LightGray, elevation = 5.dp) {
             Row(horizontalArrangement = Arrangement.Start) {
@@ -30,11 +33,11 @@ fun DetailsScreen(navController: NavController, movieData: String?) {
         Surface(modifier = Modifier.fillMaxSize()) {
             Column(
                 horizontalAlignment = CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Top
             ) {
-
+                MovieRow(movie=movie)
                 Text(
-                    text = movieData.toString(),
+                    text = movie.title,
                     style = MaterialTheme.typography.h5
                 )
 
